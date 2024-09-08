@@ -1,0 +1,47 @@
+<div class="container">
+  <mat-toolbar>
+    <button (click)="newPayment()" mat-raised-button color="primary">
+      Add New Payment
+    </button>
+  </mat-toolbar>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title> Payments Title </mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Amount</th>
+            <th>First Name</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let payment of studentPayments">
+            <td>{{ payment.id }}</td>
+            <td>{{ payment.date }}</td>
+            <td>{{ payment.type }}</td>
+            <td>{{ payment.status }}</td>
+            <td>{{ payment.amount }}</td>
+            <td>{{ payment.student.firstName }}</td>
+            <td>
+              <button
+                (click)="paymentDetails(payment)"
+                mat-raised-button
+                color="primary"
+              >
+                View Payment PDF File
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</div>

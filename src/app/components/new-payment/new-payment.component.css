@@ -1,0 +1,13 @@
+.container {
+  padding: 20px;
+  mat-form-field {
+    display: block;
+  }
+
+  .pdf-viewer {
+    height: 100vh;
+    display: block;
+    margin: 0 auto;
+    max-width: 1200px;
+  }
+}

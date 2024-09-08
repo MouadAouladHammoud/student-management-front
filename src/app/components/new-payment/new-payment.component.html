@@ -1,0 +1,100 @@
+<div class="container">
+  <form [formGroup]="paymentFormGroup">
+    <mat-card-header>
+      <mat-card-title>New Payment</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field appearance="outline">
+        <mat-label>Payment Date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="date" />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <!-- <mat-form-field appearance="outline">
+        <mat-label>Payment Date</mat-label>
+        <input matInput formControlName="date" />
+      </mat-form-field> -->
+
+      <mat-form-field appearance="outline">
+        <mat-label>Amount</mat-label>
+        <input matInput formControlName="amount" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Type</mat-label>
+        <!-- <input matInput formControlName="type" /> -->
+
+        <mat-select formControlName="type">
+          <!-- <mat-option value="CHECK">CHECK</mat-option>
+          <mat-option value="CASH">CASH</mat-option>
+          <mat-option value="TRANSFER">TRANSFER</mat-option>
+          <mat-option value="DEPOSIT">DEPOSIT</mat-option> -->
+          <mat-option *ngFor="let type of paymentTypes" [value]="type">
+            {{ type }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Student Code</mat-label>
+        <input matInput formControlName="studentCode" />
+      </mat-form-field>
+
+      <div class="file-input-wrapper">
+        <label>File</label>
+        <button
+          type="button"
+          mat-icon-button
+          matPrefix
+          (click)="f_input.click()"
+        >
+          <mat-icon>attach_file</mat-icon>
+        </button>
+
+        <input matInput readonly formControlName="fileName" />
+        <input
+          type="file"
+          hidden
+          #f_input
+          (change)="selectFile($event)"
+          accept="application/pdf"
+        />
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button (click)="savePayment()" mat-raised-button color="primary">
+        Save Payment
+      </button>
+    </mat-card-actions>
+  </form>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Payment File Selected</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <pdf-viewer
+        [src]="pdfFileUrl"
+        [original-size]="true"
+        [render-text]="true"
+        [rotation]="0"
+        [show-all]="true"
+        [fit-to-page]="true"
+        [zoom]="1"
+        [zoom-scale]="'page-width'"
+        [external-link-target]="'blank'"
+        [autoresize]="true"
+        [show-borders]="false"
+        class="pdf-viewer"
+        (after-load-complete)="afterLoadComplete($event)"
+      >
+      </pdf-viewer>
+    </mat-card-content>
+  </mat-card>
+</div>
